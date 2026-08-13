@@ -1,5 +1,5 @@
 import { addDoc, collection, getDocs, query, where, Timestamp } from "firebase/firestore";
-import { db } from "./firebase";
+import { getFirebaseDb } from "./firebase";
 
 export interface TestResult {
   id?: string;
@@ -16,7 +16,7 @@ export async function saveTestResult(
   total: number,
   passed: boolean
 ): Promise<void> {
-  await addDoc(collection(db, "test_results"), {
+  await addDoc(collection(getFirebaseDb(), "test_results"), {
     userId,
     score,
     total,
@@ -27,7 +27,7 @@ export async function saveTestResult(
 
 export async function getUserTestResults(userId: string): Promise<TestResult[]> {
   const q = query(
-    collection(db, "test_results"),
+    collection(getFirebaseDb(), "test_results"),
     where("userId", "==", userId)
   );
 
