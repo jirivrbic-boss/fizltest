@@ -1,0 +1,262 @@
+[
+  {
+    "id": 1,
+    "text": "Nebezpečným pachatelem ve smyslu použití zbraně podle § 56, odst. 1, písm. b se rozumí:",
+    "options": [
+      "osoba, která je ozbrojena střelnou zbraní, bez ohledu na konkrétní okolnosti případu.",
+      "osoba, která zjevně spáchala trestný čin, bez ohledu na konkrétní okolnosti případu.",
+      "osoba, kterou si policista podle konkrétních okolností případu za nebezpečného pachatele označí sám."
+    ],
+    "correctAnswerIndex": 2
+  },
+  {
+    "id": 2,
+    "text": "Policista je oprávněn použít zbraň dle § 56, odst. 1, písm. f):",
+    "options": [
+      "nelze-li jinak zadržet dopravní prostředek, jehož řidič bezohlednou jízdou vážně ohrožuje život nebo zdraví osob a na opětovnou výzvu nebo znamení dané podle jiného právního předpisu nezastaví.",
+      "nelze-li jinak zadržet vozidlo pohybující se nebezpečnou rychlostí...",
+      "pokud řidič motorového vozidla svojí bezohlednou jízdou ohrožuje majetek osob a na opětovnou výzvu danou podle jiného právního předpisu nezastaví."
+    ],
+    "correctAnswerIndex": 0
+  },
+  {
+    "id": 3,
+    "text": "Použití zbraně policistou proti zvířeti dle § 56, odst. 1, písm. h):",
+    "options": [
+      "není přípustné.",
+      "je přípustné, ke zneškodnění zvířete ohrožující život nebo zdraví osoby.",
+      "je přípustné jen v případě pokud zvíře bezprostředně ohrožuje životy lidí a nelze je jiným způsobem zneškodnit."
+    ],
+    "correctAnswerIndex": 2
+  },
+  {
+    "id": 4,
+    "text": "Policista je oprávněn použít zbraň dle § 56, odst. 1, písm. a):",
+    "options": [
+      "aby v případě nutné obrany nebo při pomoci v nutné obraně odvrátil přímo hrozící nebo trvající útok vedený proti jeho osobě nebo útok na život nebo zdraví jiné osoby.",
+      "v nutné obraně nebo v krajní nouzi.",
+      "aby zabránil protiprávnímu jednání pachatele, který svým jednáním ohrožuje výkon služby policisty."
+    ],
+    "correctAnswerIndex": 1
+  },
+  {
+    "id": 5,
+    "text": "Policista je oprávněn použít zbraň dle § 56, odst. 1, písm. d):",
+    "options": [
+      "nelze-li jinak překonat aktivní odpor směřující ke zmaření jeho závažného zákroku.",
+      "pokud pachatel klade pasivní odpor, který nelze jiným způsobem překonat.",
+      "nelze-li jinak překonat odpor směřující ke zmaření jakéhokoliv služebního zákroku."
+    ],
+    "correctAnswerIndex": 0
+  },
+  {
+    "id": 6,
+    "text": "Policista je oprávněn použít zbraň dle § 56, odst. 1, písm. g):",
+    "options": [
+      "když osoba, proti níž byl použit donucovací prostředek hrozba namířenou střelnou zbraní nebo varovný výstřel, nepřestává klást odpor směřující ke zmaření služebního zákroku.",
+      "když osoba, proti níž byl použit donucovací prostředek hrozba namířenou střelnou zbraní a nebo varovný výstřel, nadále odmítá uposlechnout pokynů policisty.",
+      "jestliže osoba, proti níž byl použit donucovací prostředek hrozba namířenou střelnou zbraní nebo varovný výstřel, neuposlechne příkazu policisty směřujícího k zajištění bezpečnosti jeho vlastní nebo jiné osoby."
+    ],
+    "correctAnswerIndex": 2
+  },
+  {
+    "id": 7,
+    "text": "Policista je oprávněn použít zbraň dle § 56, odst. 1, písm. c):",
+    "options": [
+      "pokusí-li se zadržený nebezpečný pachatel o útěk.",
+      "aby zamezil útěku nebezpečného pachatele, jehož nemůže jiným způsobem zadržet.",
+      "hrozí-li nebezpečí útěku nebezpečného ozbrojeného pachatele."
+    ],
+    "correctAnswerIndex": 1
+  },
+  {
+    "id": 8,
+    "text": "Policista je oprávněn použít zbraň dle § 56, odst. 1, písm. e):",
+    "options": [
+      "aby odvrátil nebezpečný útok, který ohrožuje střežený nebo chráněný objekt nebo stanoviště...",
+      "aby odvrátil ohrožení střeženého nebo chráněného objektu.",
+      "aby odvrátil násilný útok, který ohrožuje střežený nebo chráněný objekt anebo prostor."
+    ],
+    "correctAnswerIndex": 2
+  },
+  {
+    "id": 9,
+    "text": "Použití zbraně policistou podle § 56, odst. 1, písm. a) až f) je přípustné:",
+    "options": [
+      "pouze po předchozím použití donucovacích prostředků.",
+      "pouze za podmínky, že užití donucovacího prostředku by bylo zřejmě neúčinné.",
+      "pouze tehdy, jestliže předchozí použití donucovacích prostředků bylo neúčinné."
+    ],
+    "correctAnswerIndex": 1
+  },
+  {
+    "id": 10,
+    "text": "Zbraní se podle § 56 odst. 5 rozumí:",
+    "options": [
+      "zbraň střelná, revolver, samopal.",
+      "cokoli, čím je možné učinit útok důraznější.",
+      "zbraň střelná včetně střeliva a doplňků zbraně, vyjma vrhacího prostředku majícího povahu střelné zbraně podle jiného právního předpisu s dočasně zneschopňujícími účinky, dále zbraň bodná a sečná, výbušnina, speciální výbušný předmět, průlomový pyrotechnický prostředek a speciální náloživo."
+    ],
+    "correctAnswerIndex": 2
+  },
+  {
+    "id": 11,
+    "text": "V případě nevolnosti nebo změn zdravotního stavu, které mají za následek snížení způsobilosti k výkonu služby, je policista povinen:",
+    "options": [
+      "Provést vhodné opatření k zabezpečení služební zbraně. Není-li policista z náhlých zdravotních důvodů schopen tak učinit, je povinen zabezpečit služební zbraň jeho nadřízený nebo kterýkoli jiný policista přítomný na místě události.",
+      "vyjmout zásobník z těla zbraně a uložit jej mimo zbraň.",
+      "Zvýšit pozornost, aby zabránil ztrátě či odcizení zbraně."
+    ],
+    "correctAnswerIndex": 0
+  },
+  {
+    "id": 12,
+    "text": "Od výzvy s výstrahou před použitím zbraně podle § 56, odst. 1, písm. a) až e) lze upustit:",
+    "options": [
+      "v případě, že je ohrožen život nebo zdraví policisty nebo jiné osoby a zákrok nesnese odkladu.",
+      "jen v případě, že je ohrožen jeho život nebo zdraví anebo je-li ohrožen život nebo zdraví jiné osoby.",
+      "jen v případě, že služební zákrok nesnese odkladu."
+    ],
+    "correctAnswerIndex": 0
+  },
+  {
+    "id": 13,
+    "text": "Mezi donucovací prostředky podle § 52 patří:",
+    "options": [
+      "hrozba namířenou střelnou zbraní.",
+      "hrozba střelnou zbraní.",
+      "hrozba použitím střelné zbraně."
+    ],
+    "correctAnswerIndex": 0
+  },
+  {
+    "id": 14,
+    "text": "Při použití zbraně je policista povinen dbát nutné opatrnosti, zejména:",
+    "options": [
+      "neohrozit život, zdraví či majetek jiných osob a život osoby, proti níž zákrok směřuje.",
+      "neohrozit život jiných osob a co nejvíce šetřit život osoby, proti níž zákrok směřuje.",
+      "neohrozit život jiných osob a co nejvíce šetřit život a zdraví osoby, proti níž zákrok směřuje."
+    ],
+    "correctAnswerIndex": 1
+  },
+  {
+    "id": 15,
+    "text": "K provedení zákroku v době mimo výkon služby:",
+    "options": [
+      "může policista použít i soukromou zbraň, a to za stejných podmínek jako služební zbraň.",
+      "může policista použít soukromou zbraň pouze podle § 29 (nutná obrana) a § 28 (krajní nouze) zákona č. 40/2009 Sb.",
+      "nesmí policista použít soukromou zbraň."
+    ],
+    "correctAnswerIndex": 0
+  },
+  {
+    "id": 16,
+    "text": "Po každém použití zbraně, při kterém došlo ke zranění osoby, je policista povinen:",
+    "options": [
+      "bezodkladně poskytnout zraněné osobě první pomoc a zajistit lékařské ošetření.",
+      "ihned, jakmile to okolnosti dovolí, zajistit zraněné osobě lékařské ošetření a převoz do nemocnice.",
+      "ihned, jakmile to okolnosti dovolí, poskytnout zraněné osobě první pomoc a zajistit lékařské ošetření."
+    ],
+    "correctAnswerIndex": 2
+  },
+  {
+    "id": 17,
+    "text": "Policista je oprávněn použít donucovací prostředek, který (§ 53, odst. 3):",
+    "options": [
+      "umožní dosažení účelu sledovaného zákrokem anebo který je nezbytný k překonání odporu nebo útoku osoby, proti níž zakročuje.",
+      "umožní dosažení účelu sledovaného zákrokem a je nezbytný k překonání odporu nebo útoku osoby, proti níž zakročuje.",
+      "umožní dosažení účelu sledovaného zákrokem a který je nejvhodnější k překonání odporu nebo útoku osoby, proti níž zakročuje."
+    ],
+    "correctAnswerIndex": 1
+  },
+  {
+    "id": 18,
+    "text": "Policista je povinen bezodkladně ohlásit svému nadřízenému:",
+    "options": [
+      "zákrok, při kterém bylo použito donucovacího prostředku nebo zbraně, jen v případě, došlo-li při něm ke zranění policisty či jiné osoby.",
+      "pouze zákrok, při kterém bylo použito zbraně.",
+      "každý zákrok, při kterém bylo použito donucovacího prostředku nebo zbraně."
+    ],
+    "correctAnswerIndex": 2
+  },
+  {
+    "id": 19,
+    "text": "Donucovací prostředek je policista oprávněn použít (§ 53, odst. 1):",
+    "options": [
+      "k ochraně bezpečnosti své osoby anebo k ochraně veřejného pořádku, proti osobě, která je ohrožuje.",
+      "k ochraně bezpečnosti své osoby, jiné osoby nebo majetku anebo k ochraně veřejného pořádku.",
+      "při provádění služebního úkonu proti osobám, které provedení služebního úkonu svévolně zabraňují."
+    ],
+    "correctAnswerIndex": 1
+  },
+  {
+    "id": 20,
+    "text": "Policista, který ztratil nebo kterému byla odcizena zbraň, nahlásí ztrátu nebo odcizení zbraně:",
+    "options": [
+      "Neprodleně hlásit ztrátu nebo odcizení služební zbraně služebnímu funkcionáři cestou nadřízeného nebo nejbližšího útvaru policie.",
+      "Do 48 hodin služebnímu funkcionáři, přičemž provede všechna potřebná opatření k jejímu nalezení nebo vypátrání.",
+      "Do 24 hodin služebnímu funkcionáři, a to cestou bezprostředně nadřízeného vedoucího policisty nebo nejbližšího útvaru policie."
+    ],
+    "correctAnswerIndex": 0
+  },
+  {
+    "id": 21,
+    "text": "S výjimkou zákroku pod jednotným velením policista se služební zbraní při výkonu služby:",
+    "options": [
+      "Je povinen mít vždy náboj v nábojové komoře.",
+      "Zásadně nenosí náboj v nábojové komoře.",
+      "O nabití služební zbraně rozhoduje policista sám."
+    ],
+    "correctAnswerIndex": 2
+  },
+  {
+    "id": 22,
+    "text": "Povinnost výzvy s výstrahou před použitím donucovacího prostředku neplatí při použití (§ 53, odst. 2):",
+    "options": [
+      "varovného výstřelu.",
+      "prostředku k zabránění odjezdu vozidla.",
+      "služebního psa."
+    ],
+    "correctAnswerIndex": 1
+  },
+  {
+    "id": 23,
+    "text": "Při skrytém nošení nosí policista služební zbraň:",
+    "options": [
+      "zpravidla v přiděleném pouzdru na zbraň pro skryté nošení. V odůvodněných případech, vyžaduje-li to povaha výkonu služby, může policista v občanském oděvu nosit služební zbraň ve vhodném obalu.",
+      "zásadně v podpažním pouzdře připevněném na levém rameni.",
+      "v pouzdře umístěném na těle, v kapse oděvu nebo v příručním zavazadle."
+    ],
+    "correctAnswerIndex": 0
+  },
+  {
+    "id": 24,
+    "text": "Nejde o krajní nouzi (podle § 28 trestního zákoníku), jestliže:",
+    "options": [
+      "způsobený následek je závažnější, než ten, který hrozil.",
+      "způsobený následek je zřejmě stejně závažný nebo ještě závažnější než ten, který hrozil.",
+      "způsobený následek je méně závažný, než ten, který hrozil."
+    ],
+    "correctAnswerIndex": 1
+  },
+  {
+    "id": 25,
+    "text": "Pokud je schopnost k výkonu služby policisty snížena požitím alkoholických nápojů nebo jiných návykových látek:",
+    "options": [
+      "policista nesmí použít služební zbraň.",
+      "policistovi se odebere zbraň.",
+      "policista musí zabezpečit služební zbraň proti zneužití."
+    ],
+    "correctAnswerIndex": 1
+  },
+  {
+    "id": 26,
+    "text": "Mezi donucovací prostředky podle § 52 patří:",
+    "options": [
+      "prostředek ke ztížení prostorové orientace.",
+      "prostředek k usnadnění prostorové orientace.",
+      "prostředek k zamezení prostorové orientace."
+    ],
+    "correctAnswerIndex": 2
+  }
+]
