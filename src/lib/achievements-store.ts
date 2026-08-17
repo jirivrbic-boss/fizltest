@@ -6,6 +6,7 @@ import {
   getDocs,
   orderBy,
   query,
+  setDoc,
   updateDoc,
 } from "firebase/firestore";
 import { getFirebaseDb } from "./firebase";
@@ -41,15 +42,20 @@ export async function getAllAchievements(): Promise<StoredAchievement[]> {
 
 export async function seedDefaultAchievementsIfEmpty(): Promise<void> {
   const snapshot = await getDocs(collection(getFirebaseDb(), "achievements"));
-  if (!snapshot.empty) return;
+  const existingIds = new Set(
+    snapshot.docs.map((achievementDoc) => achievementDoc.data().id ?? achievementDoc.id)
+  );
+  const missingAchievements = DEFAULT_ACHIEVEMENTS.filter(
+    (achievement) => !existingIds.has(achievement.id)
+  );
 
-  for (const achievement of DEFAULT_ACHIEVEMENTS) {
-    await addDoc(collection(getFirebaseDb(), "achievements"), {
+  await Promise.all(missingAchievements.map((achievement) =>
+    setDoc(doc(getFirebaseDb(), "achievements", `default-${achievement.id}`), {
       ...achievement,
       isDefault: true,
       condition: achievement.id,
-    });
-  }
+    })
+  ));
 }
 
 export async function createAchievement(

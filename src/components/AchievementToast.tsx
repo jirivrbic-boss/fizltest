@@ -22,7 +22,7 @@ export default function AchievementToast({
 
   return (
     <div className="fixed bottom-6 left-1/2 z-50 w-full max-w-sm -translate-x-1/2 px-4">
-      <div className="achievement-toast space-y-2">
+      <div className="achievement-toast max-h-[70vh] space-y-2 overflow-y-auto pr-1">
         {achievements.map((achievement) => (
           <div
             key={achievement.id}

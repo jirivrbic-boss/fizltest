@@ -23,105 +23,126 @@ export const XP_PERFECT_BONUS = 100;
 
 export const LEVELS: LevelDefinition[] = buildLevels();
 
+type AchievementMilestone = readonly [
+  threshold: number,
+  title: string,
+  emoji: string,
+  xpReward: number,
+];
+
+function buildMilestones(
+  prefix: string,
+  milestones: readonly AchievementMilestone[],
+  description: (threshold: number) => string,
+  firstId?: string
+): AchievementDefinition[] {
+  return milestones.map(([threshold, title, emoji, xpReward], index) => ({
+    id: index === 0 && firstId ? firstId : `${prefix}_${threshold}`,
+    title,
+    description: description(threshold),
+    emoji,
+    xpReward,
+  }));
+}
+
+const TEST_MILESTONES: readonly AchievementMilestone[] = [
+  [1, "První kroky", "👣", 25],
+  [2, "Dvojitá hlídka", "👮", 30],
+  [3, "Rozjezd", "🚓", 40],
+  [5, "Maratonář", "🏃", 75],
+  [10, "Vytrvalec", "💪", 150],
+  [25, "Neúnavný", "🔋", 300],
+  [50, "Testový veterán", "🎖️", 400],
+  [75, "Sedmdesát pět směn", "🚔", 500],
+  [100, "Stovka testů", "💯", 650],
+  [150, "Ostřílený praktik", "🎯", 800],
+  [200, "Dvousettestový klub", "🏅", 1000],
+  [300, "Nezastavitelný", "⚡", 1250],
+  [500, "Legenda testů", "🏆", 1800],
+];
+
+const PASS_MILESTONES: readonly AchievementMilestone[] = [
+  [1, "Složeno!", "✅", 50],
+  [3, "Jistý krok", "👟", 60],
+  [5, "Pětkrát úspěšný", "⭐", 90],
+  [10, "Desítka bez obav", "🛡️", 150],
+  [25, "Spolehlivý", "🤝", 250],
+  [50, "Profesionál", "💼", 400],
+  [75, "Prověřený znalec", "📜", 500],
+  [100, "Stokrát úspěšný", "🌟", 700],
+  [150, "Elitní znalec", "💎", 900],
+  [250, "Mistr úspěchu", "🥇", 1200],
+  [400, "Neomylný veterán", "👑", 1600],
+];
+
+const PERFECT_MILESTONES: readonly AchievementMilestone[] = [
+  [1, "Bezchybný výkon", "💯", 100],
+  [3, "Trojitá dokonalost", "🎯", 140],
+  [5, "Pět hvězd", "⭐", 200],
+  [10, "Dokonalá desítka", "🔟", 300],
+  [20, "Bezchybný specialista", "🥇", 450],
+  [30, "Mistr přesnosti", "🏹", 600],
+  [50, "Padesát nulových chyb", "🛡️", 850],
+  [75, "Chodící klíč", "🗝️", 1100],
+  [100, "Absolutní dokonalost", "👑", 1500],
+];
+
+const STREAK_MILESTONES: readonly AchievementMilestone[] = [
+  [3, "Na vlně", "🌊", 100],
+  [5, "Neporazitelný", "🦾", 200],
+  [10, "Vítězná série", "🔥", 300],
+  [15, "Bez zaváhání", "⚡", 450],
+  [20, "Dvacet v řadě", "🚀", 600],
+  [30, "Železná forma", "🪖", 850],
+  [50, "Série legendy", "🏆", 1250],
+];
+
+const CORRECT_MILESTONES: readonly AchievementMilestone[] = [
+  [25, "První plná sada", "🧠", 25],
+  [50, "Padesát správně", "✍️", 35],
+  [100, "Stovka správných", "🎓", 50],
+  [250, "Přesná muška", "🎯", 100],
+  [500, "Půl tisíce znalostí", "📘", 175],
+  [1000, "Tisíc odpovědí", "📚", 300],
+  [2500, "Databáze v hlavě", "🧠", 500],
+  [5000, "Encyklopedista", "📚", 800],
+  [10000, "Deset tisíc zásahů", "🌠", 1300],
+];
+
+const LEVEL_MILESTONES: readonly AchievementMilestone[] = [
+  [2, "První povýšení", "🆙", 0],
+  [3, "Rozjetá kariéra", "🚓", 0],
+  [5, "Specialista", "🎯", 0],
+  [10, "Velmistr desítky", "🏆", 0],
+  [15, "Operační talent", "🦺", 0],
+  [20, "Velitel oddělení", "🌟", 0],
+  [25, "Mistr vyšetřování", "🗝️", 0],
+  [30, "Strážce zákona", "⚖️", 0],
+  [35, "Velitel operace", "🏁", 0],
+  [40, "Legenda služby", "🔱", 0],
+  [45, "Mistr PČR", "🎖️", 0],
+  [50, "Legenda PČR", "👑", 0],
+];
+
+const XP_MILESTONES: readonly AchievementMilestone[] = [
+  [500, "První balík XP", "🎁", 0],
+  [1000, "Sběratel XP", "✨", 0],
+  [2500, "Lovec XP", "🏹", 0],
+  [5000, "XP specialista", "💠", 0],
+  [10000, "Deset tisíc XP", "💰", 0],
+  [25000, "XP magnát", "🧲", 0],
+  [50000, "XP velmistr", "💎", 0],
+  [100000, "Stotisícová legenda", "🌌", 0],
+];
+
 export const ACHIEVEMENTS: AchievementDefinition[] = [
-  {
-    id: "first_test",
-    title: "První kroky",
-    description: "Dokončil jsi svůj první test",
-    emoji: "👣",
-    xpReward: 25,
-  },
-  {
-    id: "first_pass",
-    title: "Složeno!",
-    description: "Poprvé jsi úspěšně složil test",
-    emoji: "✅",
-    xpReward: 50,
-  },
-  {
-    id: "perfect_score",
-    title: "Bezchybný výkon",
-    description: "Dosáhl jsi 25/25 bodů",
-    emoji: "💯",
-    xpReward: 100,
-  },
-  {
-    id: "tests_5",
-    title: "Maratonář",
-    description: "Dokončil jsi 5 testů",
-    emoji: "🏃",
-    xpReward: 75,
-  },
-  {
-    id: "tests_10",
-    title: "Vytrvalec",
-    description: "Dokončil jsi 10 testů",
-    emoji: "💪",
-    xpReward: 150,
-  },
-  {
-    id: "tests_25",
-    title: "Neúnavný",
-    description: "Dokončil jsi 25 testů",
-    emoji: "🔋",
-    xpReward: 300,
-  },
-  {
-    id: "pass_streak_3",
-    title: "Na vlně",
-    description: "3 úspěšné testy po sobě",
-    emoji: "🌊",
-    xpReward: 100,
-  },
-  {
-    id: "pass_streak_5",
-    title: "Neporazitelný",
-    description: "5 úspěšných testů po sobě",
-    emoji: "🦾",
-    xpReward: 200,
-  },
-  {
-    id: "level_5",
-    title: "Specialista",
-    description: "Dosáhl jsi levelu 5",
-    emoji: "🎯",
-    xpReward: 0,
-  },
-  {
-    id: "level_10",
-    title: "Velmistr desítky",
-    description: "Dosáhl jsi levelu 10",
-    emoji: "🏆",
-    xpReward: 0,
-  },
-  {
-    id: "level_25",
-    title: "Mistr vyšetřování",
-    description: "Dosáhl jsi levelu 25",
-    emoji: "🗝️",
-    xpReward: 0,
-  },
-  {
-    id: "level_50",
-    title: "Legenda PČR",
-    description: "Dosáhl jsi maximálního levelu 50",
-    emoji: "👑",
-    xpReward: 0,
-  },
-  {
-    id: "xp_1000",
-    title: "Sběratel XP",
-    description: "Nasbíral jsi 1000 XP",
-    emoji: "✨",
-    xpReward: 0,
-  },
-  {
-    id: "correct_100",
-    title: "Stovka správných",
-    description: "100 správných odpovědí celkem",
-    emoji: "🎓",
-    xpReward: 50,
-  },
+  ...buildMilestones("tests", TEST_MILESTONES, (count) => `Dokončil jsi ${count} testů`, "first_test"),
+  ...buildMilestones("passes", PASS_MILESTONES, (count) => `Úspěšně jsi složil ${count} testů`, "first_pass"),
+  ...buildMilestones("perfect", PERFECT_MILESTONES, (count) => `Získal jsi ${count}× plný počet 25/25`, "perfect_score"),
+  ...buildMilestones("pass_streak", STREAK_MILESTONES, (count) => `${count} úspěšných testů po sobě`),
+  ...buildMilestones("correct", CORRECT_MILESTONES, (count) => `${count} správných odpovědí celkem`),
+  ...buildMilestones("level", LEVEL_MILESTONES, (level) => `Dosáhl jsi levelu ${level}`),
+  ...buildMilestones("xp", XP_MILESTONES, (xp) => `Nasbíral jsi ${xp.toLocaleString("cs-CZ")} XP`),
 ];
 
 export function getDefaultStats(): UserStats {
@@ -221,33 +242,46 @@ export function checkAchievements(
   totalXp: number,
   unlockedAchievements: string[]
 ): { newAchievements: AchievementDefinition[]; bonusXp: number } {
-  const newAchievements: AchievementDefinition[] = [];
-  let bonusXp = 0;
+  const unlocked = new Set(unlockedAchievements);
+  const newAchievements = ACHIEVEMENTS.filter(
+    (achievement) =>
+      !unlocked.has(achievement.id) &&
+      isAchievementUnlocked(achievement.id, stats, totalXp)
+  );
 
-  const tryUnlock = (id: string) => {
-    if (unlockedAchievements.includes(id)) return;
-    const achievement = ACHIEVEMENTS.find((item) => item.id === id);
-    if (!achievement) return;
-    newAchievements.push(achievement);
-    bonusXp += achievement.xpReward;
+  return {
+    newAchievements,
+    bonusXp: newAchievements.reduce((sum, achievement) => sum + achievement.xpReward, 0),
   };
+}
 
-  if (stats.testsCompleted >= 1) tryUnlock("first_test");
-  if (stats.testsPassed >= 1) tryUnlock("first_pass");
-  if (stats.perfectScores >= 1) tryUnlock("perfect_score");
-  if (stats.testsCompleted >= 5) tryUnlock("tests_5");
-  if (stats.testsCompleted >= 10) tryUnlock("tests_10");
-  if (stats.testsCompleted >= 25) tryUnlock("tests_25");
-  if (stats.bestPassStreak >= 3) tryUnlock("pass_streak_3");
-  if (stats.bestPassStreak >= 5) tryUnlock("pass_streak_5");
-  if (getLevelFromXp(totalXp) >= 5) tryUnlock("level_5");
-  if (getLevelFromXp(totalXp) >= 10) tryUnlock("level_10");
-  if (getLevelFromXp(totalXp) >= 25) tryUnlock("level_25");
-  if (getLevelFromXp(totalXp) >= MAX_LEVEL) tryUnlock("level_50");
-  if (totalXp >= 1000) tryUnlock("xp_1000");
-  if (stats.totalCorrectAnswers >= 100) tryUnlock("correct_100");
+function isAchievementUnlocked(id: string, stats: UserStats, totalXp: number): boolean {
+  if (id === "first_test") return stats.testsCompleted >= 1;
+  if (id === "first_pass") return stats.testsPassed >= 1;
+  if (id === "perfect_score") return stats.perfectScores >= 1;
 
-  return { newAchievements, bonusXp };
+  const match = id.match(/^(tests|passes|perfect|pass_streak|correct|level|xp)_(\d+)$/);
+  if (!match) return false;
+
+  const threshold = Number(match[2]);
+  switch (match[1]) {
+    case "tests":
+      return stats.testsCompleted >= threshold;
+    case "passes":
+      return stats.testsPassed >= threshold;
+    case "perfect":
+      return stats.perfectScores >= threshold;
+    case "pass_streak":
+      return stats.bestPassStreak >= threshold;
+    case "correct":
+      return stats.totalCorrectAnswers >= threshold;
+    case "level":
+      return getLevelFromXp(totalXp) >= threshold;
+    case "xp":
+      return totalXp >= threshold;
+    default:
+      return false;
+  }
 }
 
 export function getUnclaimedLevels(

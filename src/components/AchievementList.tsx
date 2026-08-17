@@ -19,24 +19,31 @@ export default function AchievementList({
   );
 
   if (compact) {
+    const preview = [...unlocked, ...locked].slice(0, 12);
+
     return (
-      <div className="flex flex-wrap gap-2">
-        {ACHIEVEMENTS.map((achievement) => {
-          const isUnlocked = unlockedIds.includes(achievement.id);
-          return (
-            <div
-              key={achievement.id}
-              title={`${achievement.title}: ${achievement.description}`}
-              className={`flex h-10 w-10 items-center justify-center rounded-xl text-lg ${
-                isUnlocked
-                  ? "bg-amber-500/20 ring-1 ring-amber-500/40"
-                  : "bg-slate-800 opacity-40 grayscale"
-              }`}
-            >
-              {achievement.emoji}
-            </div>
-          );
-        })}
+      <div className="space-y-2">
+        <div className="flex flex-wrap gap-2">
+          {preview.map((achievement) => {
+            const isUnlocked = unlockedIds.includes(achievement.id);
+            return (
+              <div
+                key={achievement.id}
+                title={`${achievement.title}: ${achievement.description}`}
+                className={`flex h-10 w-10 items-center justify-center rounded-xl text-lg ${
+                  isUnlocked
+                    ? "bg-amber-500/20 ring-1 ring-amber-500/40"
+                    : "bg-slate-800 opacity-40 grayscale"
+                }`}
+              >
+                {achievement.emoji}
+              </div>
+            );
+          })}
+        </div>
+        <p className="text-xs text-slate-500">
+          Odemčeno {unlocked.length} z {ACHIEVEMENTS.length}
+        </p>
       </div>
     );
   }

@@ -101,33 +101,25 @@ export async function processTestCompletion(
   const xpBreakdown = calculateTestXp(score, passed);
   let totalXpEarned = getTotalXpFromBreakdown(xpBreakdown);
   let projectedXp = previousXp + totalXpEarned;
+  const newAchievements: AchievementDefinition[] = [];
+  const unlockedIds = new Set(progress.unlockedAchievements);
 
-  const firstAchievementCheck = checkAchievements(
-    updatedStats,
-    projectedXp,
-    progress.unlockedAchievements
-  );
+  while (true) {
+    const achievementCheck = checkAchievements(
+      updatedStats,
+      projectedXp,
+      [...unlockedIds]
+    );
+    if (achievementCheck.newAchievements.length === 0) break;
 
-  xpBreakdown.achievementBonus = firstAchievementCheck.bonusXp;
-  totalXpEarned += firstAchievementCheck.bonusXp;
-  projectedXp = previousXp + totalXpEarned;
-
-  const secondAchievementCheck = checkAchievements(
-    updatedStats,
-    projectedXp,
-    [
-      ...progress.unlockedAchievements,
-      ...firstAchievementCheck.newAchievements.map((item) => item.id),
-    ]
-  );
-
-  xpBreakdown.achievementBonus += secondAchievementCheck.bonusXp;
-  totalXpEarned += secondAchievementCheck.bonusXp;
-
-  const newAchievements = [
-    ...firstAchievementCheck.newAchievements,
-    ...secondAchievementCheck.newAchievements,
-  ];
+    for (const achievement of achievementCheck.newAchievements) {
+      unlockedIds.add(achievement.id);
+      newAchievements.push(achievement);
+    }
+    xpBreakdown.achievementBonus += achievementCheck.bonusXp;
+    totalXpEarned += achievementCheck.bonusXp;
+    projectedXp = previousXp + totalXpEarned;
+  }
 
   const newTotalXp = previousXp + totalXpEarned;
   const newLevel = getLevelFromXp(newTotalXp);
@@ -138,8 +130,7 @@ export async function processTestCompletion(
     totalXp: newTotalXp,
     stats: updatedStats,
     unlockedAchievements: [
-      ...progress.unlockedAchievements,
-      ...newAchievements.map((item) => item.id),
+      ...unlockedIds,
     ],
   };
 
