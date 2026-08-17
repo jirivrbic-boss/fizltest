@@ -102,10 +102,17 @@ export default function DashboardPage() {
 
         <div className="space-y-4">
           <Link
-            href="/test"
+            href="/test/select"
             className="flex w-full items-center justify-center rounded-2xl bg-blue-600 py-5 text-lg font-semibold text-white shadow-lg transition hover:bg-blue-500 active:scale-[0.98]"
           >
             Začít test
+          </Link>
+
+          <Link
+            href="/challenges"
+            className="flex w-full items-center justify-center rounded-2xl bg-purple-600 py-5 text-lg font-semibold text-white shadow-lg transition hover:bg-purple-500 active:scale-[0.98]"
+          >
+            Výzvy
           </Link>
 
           <Link

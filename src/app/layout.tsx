@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { AuthProvider } from "@/context/AuthContext";
+import { PresenceTracker } from "@/components/PresenceTracker";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -21,7 +22,10 @@ export default function RootLayout({
   return (
     <html lang="cs">
       <body className="min-h-screen bg-slate-900 antialiased">
-        <AuthProvider>{children}</AuthProvider>
+        <AuthProvider>
+          <PresenceTracker />
+          {children}
+        </AuthProvider>
       </body>
     </html>
   );

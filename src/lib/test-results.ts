@@ -2,7 +2,7 @@ import { addDoc, collection, getDocs, query, where, Timestamp } from "firebase/f
 import { getFirebaseDb } from "./firebase";
 
 export interface SavedAnswer {
-  questionId: number;
+  questionId: string;
   questionText: string;
   options: string[];
   correctAnswerIndex: number;

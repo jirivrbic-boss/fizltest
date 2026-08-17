@@ -1,28 +1,26 @@
-import questionsData from "../../lib/questions.json";
+import type { Question } from "./tests";
 import type { SavedAnswer } from "./test-results";
 
-export interface Question {
-  id: number;
-  text: string;
-  options: string[];
-  correctAnswerIndex: number;
-}
-
-export const ALL_QUESTIONS = questionsData as Question[];
+export type { Question };
 
 export const TEST_QUESTION_COUNT = 25;
 export const TEST_DURATION_SECONDS = 20 * 60;
 export const PASSING_SCORE = 23;
 export const MAX_SCORE = 25;
 
-export function selectRandomQuestions(count: number = TEST_QUESTION_COUNT): Question[] {
-  const shuffled = [...ALL_QUESTIONS].sort(() => Math.random() - 0.5);
+export function selectRandomQuestionsFromPool(
+  pool: Question[],
+  count: number = TEST_QUESTION_COUNT
+): Question[] {
+  if (pool.length === 0) return [];
+  const shuffled = [...pool].sort(() => Math.random() - 0.5);
+  if (pool.length <= count) return shuffled;
   return shuffled.slice(0, count);
 }
 
 export function calculateScore(
   testQuestions: Question[],
-  answers: Record<number, number>
+  answers: Record<string, number>
 ): number {
   return testQuestions.reduce((score, question) => {
     if (answers[question.id] === question.correctAnswerIndex) {
@@ -44,7 +42,7 @@ export function isPassed(score: number): boolean {
 
 export function buildSavedAnswers(
   testQuestions: Question[],
-  answers: Record<number, number>
+  answers: Record<string, number>
 ): SavedAnswer[] {
   return testQuestions.map((question) => ({
     questionId: question.id,

@@ -37,32 +37,27 @@ V [Firebase Console](https://console.firebase.google.com/project/fizl-testy) je 
 - Zapnout **Email/Password** provider v sekci Authentication → Sign-in method.
 
 ### 2. Firestore Database
-- Vytvořit databázi (Production nebo Test mode).
-- Nastavit bezpečnostní pravidla:
 
-```
-rules_version = '2';
-service cloud.firestore {
-  match /databases/{database}/documents {
-    match /test_results/{resultId} {
-      allow read: if request.auth != null && resource.data.userId == request.auth.uid;
-      allow create: if request.auth != null && request.resource.data.userId == request.auth.uid;
-    }
-    match /user_progress/{userId} {
-      allow read, write: if request.auth != null && request.auth.uid == userId;
-    }
-  }
-}
-```
+- Vytvořit databázi (Production nebo Test mode).
+- Do Firebase Console vložit pravidla ze souboru [`firestore.rules`](./firestore.rules).
+- Po prvním přihlášení se původní sada otázek automaticky uloží jako první test.
+
+## Admin
+
+Admin panel je na `/admin`. Uživatel musí být nejdřív přihlášený běžným Firebase účtem a potom zadá admin heslo `Jirka123`.
+
+Panel umožňuje spravovat testy a jejich otázky, prohlížet uživatele a jejich online stav, spravovat achievementy a sledovat všechny multiplayerové výzvy.
 
 ## Funkce
 
 - Přihlášení a registrace (Firebase Auth)
-- Náhodný výběr 25 otázek z databáze
+- Výběr jednoho nebo více testů a náhodný mix 25 otázek
 - 20minutový odpočet
 - Automatické uložení výsledku do Firestore
 - Historie testů s pass/fail statusem a přehledem odpovědí
 - Level systém s XP, odměnami a achievementy
+- Veřejné multiplayerové roomky pro 2–8 hráčů, společný odpočet a stupínek vítězů
+- Admin správa testů, otázek, uživatelů, online stavu, výzev a achievementů
 - Responzivní mobilní design
 
 ## Struktura
@@ -71,6 +66,9 @@ service cloud.firestore {
 |-------|-------|
 | `/` | Přihlášení / registrace |
 | `/dashboard` | Hlavní menu + level/XP |
-| `/test` | Testovací rozhraní |
+| `/test/select` | Výběr jednoho nebo více testů |
+| `/test` | Testovací rozhraní (25 otázek / 20 minut) |
 | `/history` | Historie výsledků |
 | `/achievements` | Achievementy a progress |
+| `/challenges` | Veřejné výzvy a vytváření roomek |
+| `/admin` | Admin panel |

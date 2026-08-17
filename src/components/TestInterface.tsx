@@ -10,6 +10,7 @@ import {
 } from "@/lib/test-utils";
 import { saveTestResult } from "@/lib/test-results";
 import { processTestCompletion, TestCompletionResult } from "@/lib/user-progress";
+import { submitChallengeResult } from "@/lib/challenges";
 import AnswerReview from "@/components/AnswerReview";
 import AchievementToast from "@/components/AchievementToast";
 import LevelUpModal from "@/components/LevelUpModal";
@@ -20,15 +21,23 @@ import { useRouter } from "next/navigation";
 
 interface TestInterfaceProps {
   questions: Question[];
+  challengeId?: string;
+  skipXp?: boolean;
+  onChallengeComplete?: () => void;
 }
 
-type TestPhase = "testing" | "results";
+type TestPhase = "testing" | "results" | "waiting";
 
-export default function TestInterface({ questions }: TestInterfaceProps) {
+export default function TestInterface({
+  questions,
+  challengeId,
+  skipXp = false,
+  onChallengeComplete,
+}: TestInterfaceProps) {
   const { user } = useAuth();
   const router = useRouter();
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [answers, setAnswers] = useState<Record<number, number>>({});
+  const [answers, setAnswers] = useState<Record<string, number>>({});
   const [timeLeft, setTimeLeft] = useState(TEST_DURATION_SECONDS);
   const [phase, setPhase] = useState<TestPhase>("testing");
   const [score, setScore] = useState(0);
@@ -53,6 +62,30 @@ export default function TestInterface({ questions }: TestInterfaceProps) {
     const reviewAnswers = buildSavedAnswers(questions, answers);
     setScore(finalScore);
     setSavedAnswers(reviewAnswers);
+
+    if (challengeId && user) {
+      setSaving(true);
+      try {
+        await submitChallengeResult(challengeId, user.uid, finalScore, passed);
+        if (!skipXp) {
+          await saveTestResult(user.uid, finalScore, 25, passed, reviewAnswers);
+          const result = await processTestCompletion(user.uid, finalScore, passed);
+          setCompletionResult(result);
+          if (result.newLevels.length > 0) setLevelUpQueue(result.newLevels);
+          if (result.newAchievements.length > 0) setShowAchievements(true);
+        }
+        setSaved(true);
+        setPhase("waiting");
+        onChallengeComplete?.();
+      } catch (error) {
+        console.error("Failed to submit challenge result:", error);
+        setPhase("results");
+      } finally {
+        setSaving(false);
+      }
+      return;
+    }
+
     setPhase("results");
 
     if (user) {
@@ -77,7 +110,7 @@ export default function TestInterface({ questions }: TestInterfaceProps) {
         setSaving(false);
       }
     }
-  }, [questions, answers, user]);
+  }, [questions, answers, user, challengeId, skipXp, onChallengeComplete]);
 
   useEffect(() => {
     if (phase !== "testing") return;
@@ -96,7 +129,7 @@ export default function TestInterface({ questions }: TestInterfaceProps) {
     return () => clearInterval(interval);
   }, [phase, endTest]);
 
-  const handleAnswer = (questionId: number, optionIndex: number) => {
+  const handleAnswer = (questionId: string, optionIndex: number) => {
     setAnswers((prev) => ({ ...prev, [questionId]: optionIndex }));
   };
 
@@ -115,6 +148,23 @@ export default function TestInterface({ questions }: TestInterfaceProps) {
   const currentQuestion = questions[currentIndex];
   const answeredCount = Object.keys(answers).length;
   const isLowTime = timeLeft <= 60;
+
+  if (phase === "waiting") {
+    return (
+      <div className="mx-auto max-w-md rounded-2xl bg-slate-800 p-8 text-center">
+        <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-blue-600/20 text-3xl">
+          ⏳
+        </div>
+        <h2 className="text-xl font-bold text-white">Test dokončen!</h2>
+        <p className="mt-2 text-4xl font-bold text-white">{score} / 25</p>
+        <p className="mt-4 text-slate-400">
+          Čeká se na ostatní hráče...
+        </p>
+        {saving && <p className="mt-2 text-sm text-slate-500">Ukládání...</p>}
+        {saved && <p className="mt-2 text-sm text-green-400">Výsledek uložen</p>}
+      </div>
+    );
+  }
 
   if (phase === "results") {
     const passed = isPassed(score);
@@ -246,6 +296,14 @@ export default function TestInterface({ questions }: TestInterfaceProps) {
           </div>
         </div>
       </>
+    );
+  }
+
+  if (!currentQuestion) {
+    return (
+      <div className="text-center text-slate-400">
+        Žádné otázky k zobrazení.
+      </div>
     );
   }
 
