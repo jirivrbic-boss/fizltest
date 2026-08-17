@@ -150,5 +150,45 @@ body {
 .xp-bar-fill {
   background-size: 200% auto;
   animation: xp-shimmer 3s linear infinite;
-  transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: width 2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.xp-bar-bonus {
+  transition: width 2s cubic-bezier(0.4, 0, 0.2, 1),
+    left 2s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: xp-bonus-pulse 1s ease-in-out 3;
+}
+
+@keyframes xp-earned-pop {
+  0% {
+    opacity: 0;
+    transform: translateY(8px) scale(0.9);
+  }
+  20% {
+    opacity: 1;
+    transform: translateY(0) scale(1.05);
+  }
+  80% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-4px) scale(0.95);
+  }
+}
+
+@keyframes xp-bonus-pulse {
+  0%,
+  100% {
+    opacity: 0.85;
+  }
+  50% {
+    opacity: 1;
+    filter: brightness(1.2);
+  }
+}
+
+.xp-earned-popup {
+  animation: xp-earned-pop 3s ease-out forwards;
 }

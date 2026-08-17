@@ -48,6 +48,9 @@ service cloud.firestore {
       allow read: if request.auth != null && resource.data.userId == request.auth.uid;
       allow create: if request.auth != null && request.resource.data.userId == request.auth.uid;
     }
+    match /user_progress/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
   }
 }
 ```
@@ -58,7 +61,8 @@ service cloud.firestore {
 - Náhodný výběr 25 otázek z databáze
 - 20minutový odpočet
 - Automatické uložení výsledku do Firestore
-- Historie testů s pass/fail statusem
+- Historie testů s pass/fail statusem a přehledem odpovědí
+- Level systém s XP, odměnami a achievementy
 - Responzivní mobilní design
 
 ## Struktura
@@ -66,6 +70,7 @@ service cloud.firestore {
 | Cesta | Popis |
 |-------|-------|
 | `/` | Přihlášení / registrace |
-| `/dashboard` | Hlavní menu |
+| `/dashboard` | Hlavní menu + level/XP |
 | `/test` | Testovací rozhraní |
 | `/history` | Historie výsledků |
+| `/achievements` | Achievementy a progress |

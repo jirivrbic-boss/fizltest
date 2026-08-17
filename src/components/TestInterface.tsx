@@ -14,7 +14,7 @@ import AnswerReview from "@/components/AnswerReview";
 import AchievementToast from "@/components/AchievementToast";
 import LevelUpModal from "@/components/LevelUpModal";
 import { useAuth } from "@/context/AuthContext";
-import { LevelDefinition } from "@/lib/gamification";
+import { LevelDefinition, XP_ANIMATION_KEY } from "@/lib/gamification";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 
@@ -219,7 +219,21 @@ export default function TestInterface({ questions }: TestInterfaceProps) {
               <p className="mt-4 text-sm text-green-400">Výsledek uložen</p>
             )}
             <button
-              onClick={() => router.push("/dashboard")}
+              onClick={() => {
+                if (completionResult) {
+                  sessionStorage.setItem(
+                    XP_ANIMATION_KEY,
+                    JSON.stringify({
+                      previousXp:
+                        completionResult.progress.totalXp -
+                        completionResult.totalXpEarned,
+                      newXp: completionResult.progress.totalXp,
+                      earnedXp: completionResult.totalXpEarned,
+                    })
+                  );
+                }
+                router.push("/dashboard");
+              }}
               className="mt-8 w-full rounded-xl bg-blue-600 py-4 text-base font-semibold text-white transition hover:bg-blue-500 active:scale-[0.98]"
             >
               Zpět na Dashboard

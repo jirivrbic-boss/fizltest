@@ -5,7 +5,11 @@ import AchievementList from "@/components/AchievementList";
 import UnclaimedRewards from "@/components/UnclaimedRewards";
 import XpProgressBar from "@/components/XpProgressBar";
 import { useAuth } from "@/context/AuthContext";
-import { getUnclaimedLevels } from "@/lib/gamification";
+import {
+  XP_ANIMATION_KEY,
+  getUnclaimedLevels,
+  type XpAnimationPayload,
+} from "@/lib/gamification";
 import { getUserProgress } from "@/lib/user-progress";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -18,6 +22,7 @@ export default function DashboardPage() {
   const [unlockedAchievements, setUnlockedAchievements] = useState<string[]>([]);
   const [claimedLevelRewards, setClaimedLevelRewards] = useState<number[]>([]);
   const [loading, setLoading] = useState(true);
+  const [xpAnimation, setXpAnimation] = useState<XpAnimationPayload | null>(null);
 
   const loadProgress = useCallback(async () => {
     if (!user) return;
@@ -32,6 +37,21 @@ export default function DashboardPage() {
   useEffect(() => {
     loadProgress();
   }, [loadProgress]);
+
+  useEffect(() => {
+    const raw = sessionStorage.getItem(XP_ANIMATION_KEY);
+    if (!raw) return;
+
+    sessionStorage.removeItem(XP_ANIMATION_KEY);
+    try {
+      const payload = JSON.parse(raw) as XpAnimationPayload;
+      if (payload.earnedXp > 0) {
+        setXpAnimation(payload);
+      }
+    } catch {
+      // ignore invalid payload
+    }
+  }, []);
 
   const handleLogout = async () => {
     await logout();
@@ -55,7 +75,11 @@ export default function DashboardPage() {
 
         {!loading && (
           <div className="mb-6 space-y-4">
-            <XpProgressBar totalXp={totalXp} />
+            <XpProgressBar
+              totalXp={totalXp}
+              animateFromXp={xpAnimation?.previousXp}
+              earnedXp={xpAnimation?.earnedXp}
+            />
             <UnclaimedRewards
               levels={unclaimedLevels}
               userId={user!.uid}
