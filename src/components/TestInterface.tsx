@@ -2,12 +2,14 @@
 
 import {
   Question,
+  buildSavedAnswers,
   calculateScore,
   formatTime,
   isPassed,
   TEST_DURATION_SECONDS,
 } from "@/lib/test-utils";
 import { saveTestResult } from "@/lib/test-results";
+import AnswerReview from "@/components/AnswerReview";
 import { useAuth } from "@/context/AuthContext";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
@@ -26,6 +28,7 @@ export default function TestInterface({ questions }: TestInterfaceProps) {
   const [timeLeft, setTimeLeft] = useState(TEST_DURATION_SECONDS);
   const [phase, setPhase] = useState<TestPhase>("testing");
   const [score, setScore] = useState(0);
+  const [savedAnswers, setSavedAnswers] = useState<ReturnType<typeof buildSavedAnswers>>([]);
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
   const hasEndedRef = useRef(false);
@@ -36,13 +39,15 @@ export default function TestInterface({ questions }: TestInterfaceProps) {
 
     const finalScore = calculateScore(questions, answers);
     const passed = isPassed(finalScore);
+    const reviewAnswers = buildSavedAnswers(questions, answers);
     setScore(finalScore);
+    setSavedAnswers(reviewAnswers);
     setPhase("results");
 
     if (user) {
       setSaving(true);
       try {
-        await saveTestResult(user.uid, finalScore, 25, passed);
+        await saveTestResult(user.uid, finalScore, 25, passed, reviewAnswers);
         setSaved(true);
       } catch (error) {
         console.error("Failed to save test result:", error);
@@ -92,9 +97,9 @@ export default function TestInterface({ questions }: TestInterfaceProps) {
   if (phase === "results") {
     const passed = isPassed(score);
     return (
-      <div className="flex min-h-[60vh] flex-col items-center justify-center px-4">
+      <div className="space-y-8 px-4 pb-8">
         <div
-          className={`w-full max-w-md rounded-2xl p-8 text-center shadow-xl ${
+          className={`mx-auto w-full max-w-md rounded-2xl p-8 text-center shadow-xl ${
             passed
               ? "bg-green-600/20 ring-2 ring-green-500"
               : "bg-red-600/20 ring-2 ring-red-500"
@@ -132,6 +137,11 @@ export default function TestInterface({ questions }: TestInterfaceProps) {
           >
             Zpět na Dashboard
           </button>
+        </div>
+
+        <div>
+          <h3 className="mb-4 text-lg font-bold text-white">Přehled odpovědí</h3>
+          <AnswerReview answers={savedAnswers} />
         </div>
       </div>
     );

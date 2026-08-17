@@ -1,4 +1,5 @@
 import questionsData from "../../lib/questions.json";
+import type { SavedAnswer } from "./test-results";
 
 export interface Question {
   id: number;
@@ -39,4 +40,17 @@ export function formatTime(seconds: number): string {
 
 export function isPassed(score: number): boolean {
   return score >= PASSING_SCORE;
+}
+
+export function buildSavedAnswers(
+  testQuestions: Question[],
+  answers: Record<number, number>
+): SavedAnswer[] {
+  return testQuestions.map((question) => ({
+    questionId: question.id,
+    questionText: question.text,
+    options: question.options,
+    correctAnswerIndex: question.correctAnswerIndex,
+    selectedAnswerIndex: answers[question.id] ?? null,
+  }));
 }
