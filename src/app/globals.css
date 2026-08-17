@@ -17,3 +17,138 @@ body {
 * {
   -webkit-tap-highlight-color: transparent;
 }
+
+@keyframes confetti-fall {
+  0% {
+    transform: translateY(-10px) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(420px) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+@keyframes level-up-pop {
+  0% {
+    transform: scale(0.3);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.08);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes level-up-badge-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.5);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 0 40px 10px rgba(59, 130, 246, 0.3);
+  }
+}
+
+@keyframes fade-slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes achievement-slide-in {
+  from {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes achievement-pop {
+  0% {
+    transform: scale(0);
+  }
+  70% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes reward-claimed-pop {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes xp-shimmer {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+.confetti-particle {
+  animation: confetti-fall 2.5s ease-in forwards;
+}
+
+.level-up-modal {
+  animation: level-up-pop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.level-up-badge {
+  animation: level-up-badge-pulse 1.5s ease-in-out infinite;
+}
+
+.level-up-text,
+.level-up-message {
+  animation: fade-slide-up 0.6s ease-out forwards;
+}
+
+.level-up-message {
+  animation-delay: 0.2s;
+  opacity: 0;
+  animation-fill-mode: forwards;
+}
+
+.achievement-toast {
+  animation: achievement-slide-in 0.5s ease-out forwards;
+}
+
+.achievement-pop {
+  animation: achievement-pop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.reward-claimed {
+  animation: reward-claimed-pop 0.5s ease-out forwards;
+}
+
+.xp-bar-fill {
+  background-size: 200% auto;
+  animation: xp-shimmer 3s linear infinite;
+  transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
