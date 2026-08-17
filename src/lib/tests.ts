@@ -14,6 +14,9 @@ import {
 import { getFirebaseDb } from "./firebase";
 import questionsData from "../../lib/questions.json";
 
+const DEFAULT_TEST_NAME = "Použití zbraně § 56";
+const DEFAULT_TEST_DESCRIPTION = "Základní otázky k použití zbraně policistou";
+
 export interface TestCategory {
   id: string;
   name: string;
@@ -139,22 +142,46 @@ export async function deleteQuestion(testId: string, questionId: string): Promis
 
 export async function seedDefaultTestIfEmpty(): Promise<boolean> {
   const snapshot = await getDocs(collection(getFirebaseDb(), "tests"));
-  if (!snapshot.empty) return false;
+  const existingDefaultTest = snapshot.docs.find(
+    (testDoc) => testDoc.data().name === DEFAULT_TEST_NAME
+  );
+  const testRef = existingDefaultTest?.ref ?? doc(collection(getFirebaseDb(), "tests"));
 
-  const testRef = doc(collection(getFirebaseDb(), "tests"));
-  await setDoc(testRef, {
-    name: "Použití zbraně § 56",
-    description: "Základní otázky k použití zbraně policistou",
-    createdAt: Timestamp.now(),
-  });
-
-  for (const q of questionsData) {
-    await addDoc(collection(getFirebaseDb(), "tests", testRef.id, "questions"), {
-      text: q.text,
-      options: q.options,
-      correctAnswerIndex: q.correctAnswerIndex,
+  if (!existingDefaultTest) {
+    await setDoc(testRef, {
+      name: DEFAULT_TEST_NAME,
+      description: DEFAULT_TEST_DESCRIPTION,
+      createdAt: Timestamp.now(),
     });
   }
 
-  return true;
+  const questionsRef = collection(getFirebaseDb(), "tests", testRef.id, "questions");
+  const existingQuestions = await getDocs(questionsRef);
+  const existingTexts = new Set(
+    existingQuestions.docs.map((questionDoc) => normalizeQuestionText(questionDoc.data().text))
+  );
+  const missingQuestions = questionsData.filter(
+    (question) => !existingTexts.has(normalizeQuestionText(question.text))
+  );
+
+  await Promise.all(
+    missingQuestions.map(async (question) => {
+      await setDoc(doc(questionsRef, `default-${question.id}`), {
+        text: question.text,
+        options: question.options,
+        correctAnswerIndex: question.correctAnswerIndex,
+        sourceId: question.id,
+      });
+    })
+  );
+
+  return !existingDefaultTest || missingQuestions.length > 0;
+}
+
+function normalizeQuestionText(value: unknown): string {
+  return String(value ?? "")
+    .normalize("NFKC")
+    .replace(/\s+/g, " ")
+    .trim()
+    .toLocaleLowerCase("cs-CZ");
 }

@@ -258,5 +258,316 @@
       "prostředek k zamezení prostorové orientace."
     ],
     "correctAnswerIndex": 2
+  },
+  {
+    "id": 27,
+    "text": "Pistoli (CZ 75 D Compact) s nábojem v nábojové komoře dáváme do pouzdra vždy:",
+    "options": [
+      "s vypuštěným kohoutem na bezpečnostním ozubu.",
+      "s nataženým kohoutem v zadní poloze.",
+      "s nataženým kohoutem v zadní poloze a pojistkou v poloze zajištěno."
+    ],
+    "correctAnswerIndex": 0
+  },
+  {
+    "id": 28,
+    "text": "Policista při použití donucovacího prostředku dbá na to, aby (§ 53, odst. 5):",
+    "options": [
+      "nezpůsobil osobě újmu zřejmě nepřiměřenou povaze a nebezpečnosti jejího protiprávního jednání.",
+      "nezpůsobil osobě větší újmu, než vyžaduje zájem chráněný zákonem.",
+      "způsobil osobě, proti níž zakročuje, pouze takovou újmu, která je přiměřená okolnostem zákroku."
+    ],
+    "correctAnswerIndex": 0
+  },
+  {
+    "id": 29,
+    "text": "Nejde o nutnou obranu (podle § 29 trestního zákoníku):",
+    "options": [
+      "byla-li obrana zcela zjevně nepřiměřená síle a době trvání útoku.",
+      "měla-li obrana za následek smrt či těžké poškození zdraví útočníka.",
+      "byla-li obrana zcela zjevně nepřiměřená způsobu útoku."
+    ],
+    "correctAnswerIndex": 2
+  },
+  {
+    "id": 30,
+    "text": "Před použitím donucovacích prostředků je možno upustit od výzvy s výstrahou jen v případě (§ 53, odst. 2):",
+    "options": [
+      "že je ohroženo zdraví osoby a zákrok nesnese odkladu.",
+      "že je ohrožen život nebo zdraví osoby anebo zákrok nesnese odkladu.",
+      "že je ohrožen život nebo zdraví osoby a zákrok nesnese odkladu."
+    ],
+    "correctAnswerIndex": 2
+  },
+  {
+    "id": 31,
+    "text": "Při vytahování zbraně (pistole, revolveru) z pouzdra je prst (ukazovák vytahující ruky):",
+    "options": [
+      "mimo spoušť.",
+      "na spoušti.",
+      "dle uvážení policisty na spoušti či mimo spoušť."
+    ],
+    "correctAnswerIndex": 0
+  },
+  {
+    "id": 32,
+    "text": "Při odvracení útoku proti střeženému objektu nebo prostoru podle § 56, odst. 1, písm. e):",
+    "options": [
+      "je policista povinen použít výzvu s výstrahou, aby bylo upuštěno od útoku, s výjimkou případu, že je ohrožen život nebo zdraví policisty nebo jiné osoby a zákrok nesnese odkladu.",
+      "je policista vždy povinen použít výzvu s výstrahou, aby bylo od útoku upuštěno.",
+      "není policista povinen použít výzvu s výstrahou, aby bylo upuštěno od útoku."
+    ],
+    "correctAnswerIndex": 0
+  },
+  {
+    "id": 33,
+    "text": "Donucovacími prostředky jsou mimo jiné (§ 52):",
+    "options": [
+      "hmaty, chvaty, předváděcí a znehybňující páky.",
+      "údery, kopy, předváděcí a znehybňující páky.",
+      "hmaty, chvaty, údery a kopy."
+    ],
+    "correctAnswerIndex": 2
+  },
+  {
+    "id": 34,
+    "text": "Služební zbraň (pistole a samopal) se nosí:",
+    "options": [
+      "se zasunutým plným zásobníkem v těle zbraně.",
+      "se zasunutým zásobníkem s dostatečným počtem nábojů.",
+      "s plným zásobníkem uloženým mimo zbraň."
+    ],
+    "correctAnswerIndex": 0
+  },
+  {
+    "id": 35,
+    "text": "Policista je oprávněn použít zbraň dle § 56, odst. 1, písm. b):",
+    "options": [
+      "jestliže se pachatel, proti němuž zakročuje, na jeho výzvu nevzdá nebo se zdráhá opustit svůj úkryt.",
+      "jestliže se nebezpečný pachatel nebo jiná osoba, proti níž zakročuje, na jeho výzvu nevzdá nebo se zdráhá opustit svůj úkryt.",
+      "jestliže se nebezpečný pachatel, proti němuž zakročuje, na jeho výzvu nevzdá nebo se zdráhá opustit svůj úkryt."
+    ],
+    "correctAnswerIndex": 2
+  },
+  {
+    "id": 36,
+    "text": "Při výkonu služby v občanském oděvu nosí policista služební zbraň:",
+    "options": [
+      "podle vlastního uvážení skrytě či viditelně.",
+      "skrytě, zpravidla v přiděleném pouzdru na zbraň pro skryté nošení. V odůvodněných případech, vyžaduje-li to povaha výkonu služby, může policista v občanském oděvu nosit služební zbraň ve vhodném obalu nebo viditelně. Při viditelném nošení musí být zřejmá jeho příslušnost k policii.",
+      "vždy skrytě."
+    ],
+    "correctAnswerIndex": 1
+  },
+  {
+    "id": 37,
+    "text": "Policista je oprávněn provádět cvičnou střelbu se služební zbraní:",
+    "options": [
+      "v prostorách k tomu určených (střelnice apod.).",
+      "v rámci služební střelecké přípravy nebo na služebních střeleckých soutěžích a přeborech.",
+      "v rámci služební střelecké přípravy nebo na služebních střeleckých soutěžích, přeborech a při přípravě na ně. Při splnění podmínek stanovených zákonem o zbraních může policista za účelem prohloubení střeleckých dovedností provádět na střelnici cvičnou střelbu s přidělenou krátkou služební zbraní."
+    ],
+    "correctAnswerIndex": 2
+  },
+  {
+    "id": 38,
+    "text": "Při výkonu služby ve služebním stejnokroji nosí policista služební zbraň (s výjimkou leváků):",
+    "options": [
+      "v pouzdře navlečeném na služebním pásu na pravém nebo levém boku.",
+      "v pouzdře navlečeném na služebním pásu.",
+      "v pouzdře navlečeném na služebním pásu na pravém boku."
+    ],
+    "correctAnswerIndex": 2
+  },
+  {
+    "id": 39,
+    "text": "Při suchém nácviku střelby:",
+    "options": [
+      "policista nesmí mít nabitou zbraň ani zásobníky naplněné náboji a nesmí mít u sebe ostré střelivo.",
+      "policista nesmí mít nabitou zbraň ani zásobníky naplněné náboji, ale může mít u sebe ostré střelivo.",
+      "policista nesmí mít nabitou zbraň, ale může mít u sebe zásobníky naplněné náboji."
+    ],
+    "correctAnswerIndex": 0
+  },
+  {
+    "id": 40,
+    "text": "Před zahájením suchého nácviku střelby je policista povinen předložit ke kontrole:",
+    "options": [
+      "všechny zbraně, zásobníky neukazuje.",
+      "všechny zbraně a plné zásobníky.",
+      "všechny zbraně a všechny zásobníky."
+    ],
+    "correctAnswerIndex": 2
+  },
+  {
+    "id": 41,
+    "text": "Při ostrých střelbách je zakázáno odkládat nebo předávat zbraně jiným osobám:",
+    "options": [
+      "v průběhu střeleckého cvičení.",
+      "bez povelu řídícího střeleb nebo cvičení.",
+      "vždy."
+    ],
+    "correctAnswerIndex": 0
+  },
+  {
+    "id": 42,
+    "text": "Při ostrých střelbách je zakázáno střílet:",
+    "options": [
+      "z poškozených zbraní, střílet závadným střelivem je povoleno.",
+      "z poškozených zbraní nebo závadným střelivem či jiným než předepsaným střelivem.",
+      "závadným střelivem, střílet jiným než předepsaným střelivem je povoleno."
+    ],
+    "correctAnswerIndex": 1
+  },
+  {
+    "id": 43,
+    "text": "Na místě určeném k čištění zbraní je zakázáno:",
+    "options": [
+      "manipulovat se zbraní.",
+      "manipulovat pouze se závadným či poškozeným střelivem.",
+      "manipulovat s jakýmkoli střelivem."
+    ],
+    "correctAnswerIndex": 2
+  },
+  {
+    "id": 44,
+    "text": "Při ostrých střelbách je zakázáno:",
+    "options": [
+      "zahájit či vést střelbu v zakázaném směru střelby nebo po povelu k zastavení střelby.",
+      "zahájit či vést střelbu v zakázaném směru střelby; po vydání povelu k zastavení střelby může policista dokončit střelecké cvičení.",
+      "zahájit či vést střelbu v zakázaném směru střelby nebo po povelu k zahájení střelby."
+    ],
+    "correctAnswerIndex": 0
+  },
+  {
+    "id": 45,
+    "text": "Při ostrých střelbách bez pokynu řídícího střeleb nebo cvičení je zakázáno:",
+    "options": [
+      "nabíjet zbraň, zásobník do zbraně zasouvat lze.",
+      "zasouvat do zbraně zásobník, zbraň nabíjí policista podle vlastního rozhodnutí.",
+      "nabíjet zbraň nebo zasouvat do zbraně zásobník."
+    ],
+    "correctAnswerIndex": 2
+  },
+  {
+    "id": 46,
+    "text": "Při ostrých střelbách je nutno se zbraní manipulovat jako s nabitou:",
+    "options": [
+      "jen po povelu ke střelbě.",
+      "vždy.",
+      "pokud se policista nepřesvědčí, že zbraň není nabitá."
+    ],
+    "correctAnswerIndex": 1
+  },
+  {
+    "id": 47,
+    "text": "Ostré střelby lze provádět:",
+    "options": [
+      "výhradně s chrániči sluchu a ochrannými brýlemi v ochranné poloze.",
+      "výhradně se sluchátkovými chrániči sluchu a ochrannými brýlemi v ochranné poloze.",
+      "výhradně se sluchátkovými chrániči sluchu; ochranné brýle se používají na pokyn vedoucího střeleb."
+    ],
+    "correctAnswerIndex": 0
+  },
+  {
+    "id": 48,
+    "text": "Použít zbraň podle § 56, odst. 1, písm. f) k zadržení dopravního prostředku, jehož řidič bezohlednou jízdou vážně ohrožuje život a zdraví osob, policista může:",
+    "options": [
+      "bez výzvy.",
+      "po opětovné výzvě nebo znamení daném podle jiného právního předpisu.",
+      "teprve po předchozím varovném výstřelu."
+    ],
+    "correctAnswerIndex": 1
+  },
+  {
+    "id": 49,
+    "text": "Policista je oprávněn připoutat osobu, která:",
+    "options": [
+      "fyzicky napadá policistu nebo jinou osobu.",
+      "klade odpor a po předchozí marné výzvě nelze tento odpor překonat.",
+      "páchá úmyslný trestný čin, za který lze uložit trest odnětí svobody s horní hranicí trestní sazby nejméně 8 let."
+    ],
+    "correctAnswerIndex": 0
+  },
+  {
+    "id": 50,
+    "text": "Policista je oprávněn vyzvat osobu k vydání zbraně:",
+    "options": [
+      "hrozí-li nebezpečí, že jí bude neoprávněně užito k násilí nebo pohrůžce násilím.",
+      "hrozí-li nebezpečí, že jí bude na místě veřejnosti přístupném neoprávněně užito k násilí nebo pohrůžce násilím.",
+      "hrozí-li nebezpečí, že držitel zbraně bude požívat alkoholické nápoje."
+    ],
+    "correctAnswerIndex": 0
+  },
+  {
+    "id": 51,
+    "text": "Policista je povinen před provedením úkonu:",
+    "options": [
+      "poučit osobu dotčenou úkonem o právních důvodech provedení úkonu, a jde-li o úkon spojený se zásahem do práv nebo svobod osoby, také o jejích právech a povinnostech. Pokud poučení brání povaha a okolnosti úkonu, poučí nebo zajistí toto poučení ihned, jakmile to okolnosti dovolí.",
+      "po provedeném služebním zákroku nebo služebním úkonu osobu vždy poučit o jejích právech.",
+      "vyzvat osobu k podání vysvětlení a po provedeném služebním zákroku poučit osobu o právních důvodech provedení zákroku, také o jejích povinnostech a následně o právu nevypovídat a o právu na přidělení advokáta."
+    ],
+    "correctAnswerIndex": 0
+  },
+  {
+    "id": 52,
+    "text": "Policista předvedením osoby ke zjištění totožnosti může osobu omezit na:",
+    "options": [
+      "neomezeně dlouhou dobu.",
+      "dobu nezbytnou nutnou ke zjištění totožnosti, maximálně však na 24 hodin.",
+      "48 hodin, kdy po 24 hodinách musí požádat o souhlas státního zástupce."
+    ],
+    "correctAnswerIndex": 1
+  },
+  {
+    "id": 53,
+    "text": "Policista, který se rozhodl zasunout náboj do nábojové komory, manipuluje s pistolí následujícím způsobem (u CZ 75 D Compact):",
+    "options": [
+      "míří zbraní do bezpečného prostoru s prstem mimo spoušť, zasune zásobník do zbraně, natažením závěru zasune náboj do nábojové komory a vypustí kohout na bezpečnostní ozub vypouštěcí pákou kohoutu.",
+      "míří zbraní do bezpečného prostoru s prstem mimo spoušť, zasune zásobník do zbraně, natažením závěru zasune náboj do nábojové komory a zbraň uloží bezpečně do pouzdra.",
+      "míří zbraní do bezpečného prostoru s prstem mimo spoušť, zasune zásobník do zbraně, natažením závěru zasune náboj do nábojové komory a za stálého míření do bezpečného prostoru vypustí kohout stisknutím spouště."
+    ],
+    "correctAnswerIndex": 0
+  },
+  {
+    "id": 54,
+    "text": "Při aplikaci oprávnění uvedeného v § 35 zák. č. 273/2008 Sb., o Policii České republiky, se zbraní rozumí:",
+    "options": [
+      "cokoli, čím je možno učinit útok proti tělu důraznějším.",
+      "zbraň střelná.",
+      "střelná zbraň a speciální náloživo."
+    ],
+    "correctAnswerIndex": 0
+  },
+  {
+    "id": 55,
+    "text": "Při provádění úkonu je policista povinen prokázat svou příslušnost k policii:",
+    "options": [
+      "služebním stejnokrojem, služebním průkazem nebo odznakem služby kriminální policie a vyšetřování, a to v době služby.",
+      "ústním prohlášením POLICIE, které je za všech okolností postačující.",
+      "služebním stejnokrojem, služebním průkazem nebo odznakem policie, na kterých musí být zřetelně viditelné identifikační číslo."
+    ],
+    "correctAnswerIndex": 2
+  },
+  {
+    "id": 56,
+    "text": "Účinný dostřel zbraně:",
+    "options": [
+      "je vzdálenost od zbraně, na niž lze efektivně vyřadit střelbou zvolený cíl.",
+      "je největší dosažený dostřel při střelbě z určité zbraně s určitým druhem náboje.",
+      "je vzdálenost od zbraně, na kterou jsou rozlišitelné zásahové zóny cíle."
+    ],
+    "correctAnswerIndex": 0
+  },
+  {
+    "id": 57,
+    "text": "V případě nebezpečného pachatele se jedná zejména o pachatele trestného činu, a to:",
+    "options": [
+      "pachatele úmyslného trestného činu, o němž vzhledem k jeho závažnosti nebo způsobu provedení lze důvodně předpokládat, že je nebezpečný pro život a zdraví jiných osob (je ozbrojen střelnou zbraní).",
+      "pachatele úmyslného trestného činu, o němž vyjde najevo, že je zvlášť nebezpečný pro život a zdraví jiných osob.",
+      "osobu, která se pokouší protiprávně narušit střežený nebo chráněný objekt na základě ustanovení právních předpisů.",
+      "pachatele, který při pronásledování policistou demonstruje spáchání sebevraždy."
+    ],
+    "correctAnswerIndex": 0
   }
 ]
