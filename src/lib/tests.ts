@@ -10,6 +10,7 @@ import {
   setDoc,
   Timestamp,
   updateDoc,
+  writeBatch,
 } from "firebase/firestore";
 import { getFirebaseDb } from "./firebase";
 import questionsData from "../../lib/questions.json";
@@ -122,6 +123,38 @@ export async function addQuestion(testId: string, input: QuestionInput): Promise
     correctAnswerIndex: input.correctAnswerIndex,
   });
   return ref.id;
+}
+
+export async function addQuestionsBatch(
+  testId: string,
+  questions: QuestionInput[]
+): Promise<number> {
+  const questionsRef = collection(getFirebaseDb(), "tests", testId, "questions");
+  const chunkSize = 450;
+
+  for (let start = 0; start < questions.length; start += chunkSize) {
+    const batch = writeBatch(getFirebaseDb());
+    for (const question of questions.slice(start, start + chunkSize)) {
+      if (
+        !question.text.trim() ||
+        question.options.length < 2 ||
+        question.options.some((option) => !option.trim()) ||
+        question.correctAnswerIndex < 0 ||
+        question.correctAnswerIndex >= question.options.length
+      ) {
+        throw new Error("Import obsahuje neplatnou otázku");
+      }
+
+      batch.set(doc(questionsRef), {
+        text: question.text.trim(),
+        options: question.options.map((option) => option.trim()),
+        correctAnswerIndex: question.correctAnswerIndex,
+      });
+    }
+    await batch.commit();
+  }
+
+  return questions.length;
 }
 
 export async function updateQuestion(

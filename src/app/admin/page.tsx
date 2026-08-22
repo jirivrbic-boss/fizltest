@@ -8,6 +8,7 @@ import {
 } from "@/lib/admin-auth";
 import {
   addQuestion,
+  addQuestionsBatch,
   createTest,
   deleteQuestion,
   deleteTest,
@@ -18,6 +19,7 @@ import {
   type Question,
   type TestCategory,
 } from "@/lib/tests";
+import { normalizeQuestionSearch, parseQuestionImport } from "@/lib/question-import";
 import {
   createAchievement,
   deleteAchievement,
@@ -31,9 +33,18 @@ import { getFirebaseDb } from "@/lib/firebase";
 import { getLeaderboard, type Challenge } from "@/lib/challenges";
 import ProtectedRoute from "@/components/ProtectedRoute";
 import Link from "next/link";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 
 type AdminTab = "tests" | "users" | "achievements" | "challenges";
+
+const IMPORT_EXAMPLE = `zadání (Jak veliký je Jirka?)
+špatná odpověď (180 cm)
+správná odpověď (190 cm)
+špatná odpověď (120 cm)
+
+zadání (Kolik je 2 + 2?)
+správná odpověď (4)
+špatná odpověď (5)`;
 
 function AdminLogin({ onLogin }: { onLogin: () => void }) {
   const [password, setPassword] = useState("");
@@ -75,6 +86,139 @@ function AdminLogin({ onLogin }: { onLogin: () => void }) {
   );
 }
 
+function QuestionImportPanel({
+  testId,
+  existingQuestions,
+  onClose,
+  onSaved,
+}: {
+  testId: string;
+  existingQuestions: Question[];
+  onClose: () => void;
+  onSaved: () => Promise<void>;
+}) {
+  const [value, setValue] = useState("");
+  const [saving, setSaving] = useState(false);
+  const [message, setMessage] = useState("");
+  const parsed = useMemo(() => parseQuestionImport(value), [value]);
+  const existingTexts = useMemo(
+    () => new Set(existingQuestions.map((question) => normalizeQuestionSearch(question.text))),
+    [existingQuestions]
+  );
+  const questionsToSave = useMemo(
+    () => parsed.questions.filter(
+      (question) => !existingTexts.has(normalizeQuestionSearch(question.text))
+    ),
+    [existingTexts, parsed.questions]
+  );
+  const duplicateCount = parsed.questions.length - questionsToSave.length;
+
+  const handleSave = async () => {
+    if (parsed.errors.length > 0 || questionsToSave.length === 0) return;
+    setSaving(true);
+    setMessage("");
+    try {
+      const savedCount = await addQuestionsBatch(testId, questionsToSave);
+      await onSaved();
+      setValue("");
+      setMessage(`Uloženo ${savedCount} otázek.`);
+    } catch (error) {
+      setMessage(error instanceof Error ? error.message : "Otázky se nepodařilo uložit.");
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  return (
+    <div className="space-y-4 rounded-xl border border-blue-500/40 bg-blue-600/10 p-4">
+      <div className="flex items-start justify-between gap-3">
+        <div>
+          <h3 className="font-bold text-white">Hromadné vložení otázek</h3>
+          <p className="mt-1 text-xs text-slate-400">
+            Každá otázka začíná slovem „zadání“. Odpovědi mohou být v libovolném pořadí.
+          </p>
+        </div>
+        <button onClick={onClose} className="text-sm text-slate-400 hover:text-white">
+          Zavřít
+        </button>
+      </div>
+
+      <textarea
+        value={value}
+        onChange={(event) => {
+          setValue(event.target.value);
+          setMessage("");
+        }}
+        placeholder={IMPORT_EXAMPLE}
+        rows={14}
+        className="w-full rounded-lg border border-slate-600 bg-slate-950 px-3 py-3 font-mono text-sm text-white outline-none focus:border-blue-500"
+      />
+
+      {value.trim() && (
+        <div className="space-y-3">
+          <div className="flex flex-wrap gap-2 text-xs">
+            <span className="rounded-full bg-green-600/20 px-2.5 py-1 text-green-300">
+              Rozpoznáno: {parsed.questions.length}
+            </span>
+            {duplicateCount > 0 && (
+              <span className="rounded-full bg-amber-500/20 px-2.5 py-1 text-amber-300">
+                Již existuje: {duplicateCount} (přeskočí se)
+              </span>
+            )}
+            <span className="rounded-full bg-blue-500/20 px-2.5 py-1 text-blue-300">
+              K uložení: {questionsToSave.length}
+            </span>
+          </div>
+
+          {parsed.errors.length > 0 && (
+            <div className="rounded-lg bg-red-600/15 p-3 text-sm text-red-300">
+              <p className="mb-1 font-semibold">Import je potřeba opravit:</p>
+              <ul className="list-disc space-y-1 pl-5">
+                {parsed.errors.map((error, index) => <li key={index}>{error}</li>)}
+              </ul>
+            </div>
+          )}
+
+          {parsed.questions.length > 0 && (
+            <div className="rounded-lg bg-slate-900/70 p-3">
+              <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-slate-400">
+                Náhled prvních otázek
+              </p>
+              <div className="space-y-2">
+                {parsed.questions.slice(0, 3).map((question, index) => (
+                  <div key={`${question.text}-${index}`} className="text-xs">
+                    <p className="font-medium text-white">{index + 1}. {question.text}</p>
+                    <p className="text-green-400">
+                      Správně: {question.options[question.correctAnswerIndex]}
+                    </p>
+                  </div>
+                ))}
+                {parsed.questions.length > 3 && (
+                  <p className="text-xs text-slate-500">+ dalších {parsed.questions.length - 3}</p>
+                )}
+              </div>
+            </div>
+          )}
+        </div>
+      )}
+
+      {message && (
+        <p className={`text-sm ${message.startsWith("Uloženo") ? "text-green-400" : "text-red-400"}`}>
+          {message}
+        </p>
+      )}
+
+      <button
+        onClick={handleSave}
+        disabled={saving || parsed.errors.length > 0 || questionsToSave.length === 0}
+        className="w-full rounded-lg bg-blue-600 py-3 text-sm font-semibold text-white hover:bg-blue-500 disabled:cursor-not-allowed disabled:opacity-40"
+      >
+        {saving ? "Ukládání..." : `Uložit ${questionsToSave.length} otázek`}
+      </button>
+    </div>
+  );
+}
+
 function TestsPanel() {
   const [tests, setTests] = useState<TestCategory[]>([]);
   const [selectedTestId, setSelectedTestId] = useState<string | null>(null);
@@ -85,6 +229,8 @@ function TestsPanel() {
   const [qText, setQText] = useState("");
   const [qOptions, setQOptions] = useState(["", "", ""]);
   const [qCorrect, setQCorrect] = useState(0);
+  const [showImport, setShowImport] = useState(false);
+  const [questionSearch, setQuestionSearch] = useState("");
 
   const loadTests = useCallback(async () => {
     await seedDefaultTestIfEmpty();
@@ -100,7 +246,15 @@ function TestsPanel() {
     setSelectedTestId(testId);
     const qs = await getQuestionsForTest(testId);
     setQuestions(qs);
+    setShowImport(false);
+    setQuestionSearch("");
     resetQuestionForm();
+  };
+
+  const refreshSelectedTest = async () => {
+    if (!selectedTestId) return;
+    setQuestions(await getQuestionsForTest(selectedTestId));
+    await loadTests();
   };
 
   const resetQuestionForm = () => {
@@ -142,8 +296,7 @@ function TestsPanel() {
     }
 
     resetQuestionForm();
-    setQuestions(await getQuestionsForTest(selectedTestId));
-    await loadTests();
+    await refreshSelectedTest();
   };
 
   const handleEditQuestion = (q: Question) => {
@@ -156,9 +309,16 @@ function TestsPanel() {
   const handleDeleteQuestion = async (qId: string) => {
     if (!selectedTestId || !confirm("Smazat otázku?")) return;
     await deleteQuestion(selectedTestId, qId);
-    setQuestions(await getQuestionsForTest(selectedTestId));
-    await loadTests();
+    await refreshSelectedTest();
   };
+
+  const filteredQuestions = useMemo(() => {
+    const search = normalizeQuestionSearch(questionSearch);
+    if (!search) return questions;
+    return questions.filter((question) =>
+      normalizeQuestionSearch(question.text).includes(search)
+    );
+  }, [questionSearch, questions]);
 
   return (
     <div className="grid gap-6 lg:grid-cols-2">
@@ -210,12 +370,31 @@ function TestsPanel() {
       </div>
 
       <div className="space-y-4">
-        <h2 className="text-lg font-bold text-white">
-          {selectedTestId ? "Otázky" : "Vyberte test"}
-        </h2>
+        <div className="flex items-center justify-between gap-3">
+          <h2 className="text-lg font-bold text-white">
+            {selectedTestId ? `Otázky (${questions.length})` : "Vyberte test"}
+          </h2>
+          {selectedTestId && (
+            <button
+              onClick={() => setShowImport((visible) => !visible)}
+              className="rounded-lg bg-indigo-600 px-3 py-2 text-sm font-semibold text-white hover:bg-indigo-500"
+            >
+              {showImport ? "Zavřít import" : "Vložit test"}
+            </button>
+          )}
+        </div>
 
         {selectedTestId && (
           <>
+            {showImport && (
+              <QuestionImportPanel
+                testId={selectedTestId}
+                existingQuestions={questions}
+                onClose={() => setShowImport(false)}
+                onSaved={refreshSelectedTest}
+              />
+            )}
+
             <div className="rounded-xl bg-slate-800 p-4 space-y-3">
               <textarea
                 value={qText}
@@ -263,8 +442,23 @@ function TestsPanel() {
               </div>
             </div>
 
+            <div className="space-y-2">
+              <input
+                type="search"
+                value={questionSearch}
+                onChange={(event) => setQuestionSearch(event.target.value)}
+                placeholder="Vyhledat zadání v testu..."
+                className="w-full rounded-lg border border-slate-600 bg-slate-900 px-3 py-2.5 text-sm text-white outline-none focus:border-blue-500"
+              />
+              {questionSearch && (
+                <p className="text-xs text-slate-500">
+                  Nalezeno {filteredQuestions.length} z {questions.length} otázek
+                </p>
+              )}
+            </div>
+
             <div className="max-h-96 space-y-2 overflow-y-auto">
-              {questions.map((q, idx) => (
+              {filteredQuestions.map((q, idx) => (
                 <div key={q.id} className="rounded-xl bg-slate-800/80 p-3">
                   <p className="text-sm font-medium text-white">
                     {idx + 1}. {q.text}
@@ -298,6 +492,11 @@ function TestsPanel() {
                   </div>
                 </div>
               ))}
+              {filteredQuestions.length === 0 && (
+                <p className="rounded-xl bg-slate-800/60 p-6 text-center text-sm text-slate-500">
+                  Žádné zadání neodpovídá hledání.
+                </p>
+              )}
             </div>
           </>
         )}
